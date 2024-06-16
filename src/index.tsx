@@ -3,6 +3,9 @@ import { render } from "solid-js/web"
 import { Route, Router } from "@solidjs/router"
 import "./index.css"
 import App from "./App"
+import { Layout } from "./routes/Layout"
+import { QueryProvider } from "./modules/query/context/QueryContext"
+import { UserProvider } from "./modules/user/context/UserContext"
 
 const root = document.getElementById("root")
 
@@ -14,9 +17,13 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
 
 render(
   () => (
-    <Router>
-      <Route path="/" component={App} />
-    </Router>
+    <QueryProvider>
+      <UserProvider>
+        <Router root={Layout}>
+          <Route path="/" component={App} />
+        </Router>
+      </UserProvider>
+    </QueryProvider>
   ),
   root!
 )
