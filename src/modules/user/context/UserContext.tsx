@@ -5,11 +5,11 @@ import { User } from "../types/user.type"
 const UserContext = createContext()
 
 export const UserProvider: ParentComponent = ({ children }) => {
-  const { setUser, remoteDb } = useQueryContext()
+  const [_, { setUser, remoteDb }] = useQueryContext()
 
   const login = async (
     userId: string,
-    password: string
+    password: string,
   ): Promise<User | null> => {
     try {
       const response = await remoteDb().logIn(userId, password)
@@ -47,6 +47,7 @@ export const UserProvider: ParentComponent = ({ children }) => {
     login,
   }
 
+  console.log("QueryProvider", value)
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>
 }
 
