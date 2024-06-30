@@ -32,9 +32,6 @@ importers:
       pouchdb-browser:
         specifier: ^8.0.1
         version: 8.0.1
-      retrobus:
-        specifier: ^1.9.3
-        version: 1.9.3
       solid-js:
         specifier: ^1.8.11
         version: 1.8.11
@@ -1609,9 +1606,6 @@ packages:
 
   requires-port@1.0.0:
     resolution: {integrity: sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ==}
-
-  retrobus@1.9.3:
-    resolution: {integrity: sha512-z10FMtlhL9rYRE3cUucqLVsIhz3SHSrIpt9hmo/2FNg7lD350Eu8YAQPwyqVRNr/M+cOQfgZrlrYsMTM6e00tg==}
 
   rollup@4.9.5:
     resolution: {integrity: sha512-E4vQW0H/mbNMw2yLSqJyjtkHY9dslf/p0zuT1xehNRqUTBOFMqEjguDvqhXr7N7r/4ttb2jr4T41d3dncmIgbQ==}
@@ -3620,8 +3614,6 @@ snapshots:
       is-nil-x: 1.4.2
 
   requires-port@1.0.0: {}
-
-  retrobus@1.9.3: {}
 
   rollup@4.9.5:
     dependencies:

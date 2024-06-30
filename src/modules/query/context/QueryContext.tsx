@@ -41,7 +41,7 @@ type ContextType = [
   {
     setUser: (user: User) => void
     readonly remoteDb: () => PouchDB.Database<{}>
-  },
+  }
 ]
 
 const QueryContext = createContext<ContextType>([
@@ -49,10 +49,13 @@ const QueryContext = createContext<ContextType>([
     user: null,
     db: new PouchDb(LOCALE_DB),
   },
-  {},
+  {
+    setUser: () => {},
+    remoteDb,
+  },
 ])
 
-export const QueryProvider: ParentComponent = ({ children }) => {
+export const QueryProvider: ParentComponent = (props) => {
   const [state, setState] = createStore<State>({
     user: null,
     db: new PouchDb(LOCALE_DB),
@@ -88,7 +91,7 @@ export const QueryProvider: ParentComponent = ({ children }) => {
         if (error.name !== "unauthorized") {
           // queueNotifService.error(`une erreur s'est produite`)
         }
-      }),
+      })
   )
 
   createEffect(() => {
@@ -97,24 +100,29 @@ export const QueryProvider: ParentComponent = ({ children }) => {
     }
   })
 
+  const value: ContextType = [
+    state,
+    {
+      setUser: (user: User) => {
+        console.log(user)
+
+        setState("user", () => user)
+      },
+      remoteDb,
+    },
+  ]
+
   return (
-    <QueryContext.Provider
-      value={[
-        state,
-        { setUser: (user: User) => setState("user", user), remoteDb },
-      ]}
-    >
-      {children}
+    <QueryContext.Provider value={value}>
+      {props.children}
     </QueryContext.Provider>
   )
 }
 
 export const useQueryContext = () => {
   const context = useContext(QueryContext)
-  console.log("useQueryContext", context)
-
   if (!context) {
-    throw new Error("useQueryContext: cannot find a QueryContext")
+    throw new Error("useQueryContext must be used within a QueryProvider")
   }
   return context
 }
